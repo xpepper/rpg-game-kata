@@ -17,12 +17,22 @@ class RPGGameTest {
     }
 
     @Test
-    fun `when damage received exceeds current health, health becomes 0 and the character dies`() {
-       val character = Character()
+    fun `when damage received exceeds current health, health becomes 0`() {
+        val character = Character()
 
         character.receiveDamage(2000)
 
         assertEquals(0, character.health)
+    }
+
+    @Test
+    fun `when damage received exceeds current health, the character dies`() {
+        val character = Character()
+
+        assertTrue(character.isAlive())
+
+        character.receiveDamage(2000)
+
         assertFalse(character.isAlive())
     }
 }
