@@ -1,3 +1,9 @@
+# TODO
+
+* separare la health interna mutabile da quella esterna che deve essere accesibile solo in lettura
+
+---
+
 RPG Combat Kata
 ================
 Source: [https://github.com/ardalis/kata-catalog](https://github.com/ardalis/kata-catalog)

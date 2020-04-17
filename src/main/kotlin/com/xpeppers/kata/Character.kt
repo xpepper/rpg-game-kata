@@ -12,4 +12,8 @@ class Character {
     fun isAlive(): Boolean {
         return health > 0
     }
+
+    fun heal(health: Int) {
+        this.health += health
+    }
 }

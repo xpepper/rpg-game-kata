@@ -35,4 +35,15 @@ class RPGGameTest {
 
         assertFalse(character.isAlive())
     }
+
+    @Test fun `a character can receive heal`() {
+        val character = Character()
+        character.receiveDamage(10)
+        val currentHealth = character.health
+
+        character.heal(1)
+
+        assertEquals(currentHealth + 1, character.health)
+    }
+
 }
