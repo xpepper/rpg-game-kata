@@ -4,6 +4,14 @@ class Character {
     var health: Int = 1000
 
     fun receiveDamage(damage: Int) {
-        health -= damage
+        if (damage < health) {
+            health -= damage
+        } else {
+            health = 0
+        }
+    }
+
+    fun isAlive(): Boolean {
+        return health > 0
     }
 }
