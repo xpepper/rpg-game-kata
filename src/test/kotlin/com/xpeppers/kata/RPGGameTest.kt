@@ -36,7 +36,8 @@ class RPGGameTest {
         assertFalse(character.isAlive())
     }
 
-    @Test fun `a character can receive heal`() {
+    @Test
+    fun `a character can receive heal`() {
         val character = Character()
         character.receiveDamage(10)
         val currentHealth = character.health
@@ -46,4 +47,14 @@ class RPGGameTest {
         assertEquals(currentHealth + 1, character.health)
     }
 
+    @Test
+    fun `healing cannot raise health above 1000`() {
+        val character = Character()
+        val maxHealth = 1000
+
+        character.receiveDamage(5)
+        character.heal(10)
+
+        assertEquals(maxHealth, character.health)
+    }
 }

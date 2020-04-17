@@ -1,6 +1,7 @@
 package com.xpeppers.kata
 
 import kotlin.math.max
+import kotlin.math.min
 
 class Character {
     var health: Int = 1000
@@ -14,6 +15,6 @@ class Character {
     }
 
     fun heal(health: Int) {
-        this.health += health
+        this.health = min(this.health + health, 1000)
     }
 }
