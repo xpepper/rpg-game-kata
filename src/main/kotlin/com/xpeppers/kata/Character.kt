@@ -3,7 +3,7 @@ package com.xpeppers.kata
 import kotlin.math.max
 import kotlin.math.min
 
-class Character(private val level: Int) {
+class Character(private val level: Int = 1) {
     var health: Int = 1000
         private set
 

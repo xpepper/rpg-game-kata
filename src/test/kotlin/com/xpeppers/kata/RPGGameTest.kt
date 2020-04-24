@@ -7,8 +7,8 @@ class RPGGameTest {
 
     @Test
     fun `a character can deal damage only to another character`() {
-        val attacker = Character(1)
-        val character = Character(1)
+        val attacker = Character()
+        val character = Character()
         val initialHealth = character.health
         val damage = 1
 
@@ -19,7 +19,7 @@ class RPGGameTest {
 
     @Test
     fun `a character cannot deal damage to itself`() {
-        val attacker = Character(1)
+        val attacker = Character()
         val initialHealth = attacker.health
 
         attacker.attack(attacker, 1)
@@ -29,7 +29,7 @@ class RPGGameTest {
 
     @Test
     fun `when damage received exceeds current health, health becomes 0`() {
-        val character = Character(1)
+        val character = Character()
 
         Character(1).attack(character, 2000)
 
@@ -38,19 +38,19 @@ class RPGGameTest {
 
     @Test
     fun `when damage received exceeds current health, the character dies`() {
-        val character = Character(1)
+        val character = Character()
 
         assertTrue(character.isAlive())
 
-        Character(1).attack(character, 2000)
+        Character().attack(character, 2000)
 
         assertFalse(character.isAlive())
     }
 
     @Test
     fun `a character can receive heal`() {
-        val character = Character(1)
-        Character(1).attack(character, 10)
+        val character = Character()
+        Character().attack(character, 10)
         val currentHealth = character.health
 
         character.heal(1)
@@ -60,7 +60,7 @@ class RPGGameTest {
 
     @Test
     fun `healing cannot raise health above 1000`() {
-        val character = Character(1)
+        val character = Character()
         val maxHealth = 1000
         Character(1).attack(character, 5)
 
@@ -71,7 +71,7 @@ class RPGGameTest {
 
     @Test
     fun `dead characters cannot be healed`() {
-        val character = Character(1)
+        val character = Character()
         Character(1).attack(character, 1001)
 
         character.heal(20)
@@ -102,4 +102,16 @@ class RPGGameTest {
         assertEquals(initialHealth - (10 + 10/2), defender.health)
 
     }
+
+    /*@Test
+    fun `melee fighters can attack within a range of 2 meters`() {
+        val meleeAttacker = Character(1, maxRangeAttack = 2)
+        val meleeDefender = Character(1, maxRangeAttack = 2)
+        val initialHealth = meleeDefender.health
+
+        meleeAttacker.attack(meleeDefender, 5, distance = 1)
+
+        assertEquals(initialHealth - 5, meleeDefender.health)
+
+    }*/
 }
