@@ -9,11 +9,8 @@ class Character(private val level: Int) {
 
     fun attack(character: Character, damage: Int) {
         if (this !== character) {
-            if (character.level - this.level >= 5) {
-                character.receiveDamage(damage / 2)
-            } else {
-                character.receiveDamage(damage)
-            }
+            val damageToDeal = computeDamageFor(character, damage)
+            character.receiveDamage(damageToDeal)
         }
     }
 
@@ -33,5 +30,12 @@ class Character(private val level: Int) {
 
     private fun healYourself(health: Int) {
         this.health = min(this.health + health, 1000)
+    }
+
+    private fun computeDamageFor(character: Character, damage: Int): Int {
+        if (character.level - this.level >= 5) {
+            return damage / 2
+        }
+        return damage
     }
 }
