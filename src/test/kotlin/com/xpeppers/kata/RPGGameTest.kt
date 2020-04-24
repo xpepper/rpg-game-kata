@@ -6,6 +6,18 @@ import org.junit.jupiter.api.Test
 class RPGGameTest {
 
     @Test
+    fun `a character can deal damage only to another character`() {
+        val attacker = Character()
+        val character = Character()
+        val initialHealth = character.health
+        val damage = 1
+
+        attacker.attack(character, damage)
+
+        assertEquals(initialHealth - damage, character.health)
+    }
+
+    @Test
     fun `when character receive damage its health decrease by that damage quantity`() {
         val character = Character()
         val initialHealth = character.health

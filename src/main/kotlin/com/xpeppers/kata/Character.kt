@@ -7,6 +7,10 @@ class Character {
     var health: Int = 1000
         private set
 
+    fun attack(character: Character, damage: Int) {
+        character.receiveDamage(damage)
+    }
+
     fun receiveDamage(damage: Int) {
         health = max(health - damage, 0)
     }
