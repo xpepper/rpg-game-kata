@@ -16,6 +16,12 @@ class Character {
     }
 
     fun heal(health: Int) {
+        if (isAlive()) {
+            healYourself(health)
+        }
+    }
+
+    private fun healYourself(health: Int) {
         this.health = min(this.health + health, 1000)
     }
 }
