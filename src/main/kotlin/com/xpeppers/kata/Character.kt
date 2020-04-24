@@ -5,6 +5,7 @@ import kotlin.math.min
 
 class Character {
     var health: Int = 1000
+        private set
 
     fun receiveDamage(damage: Int) {
         health = max(health - damage, 0)
