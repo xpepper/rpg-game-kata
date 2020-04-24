@@ -36,6 +36,9 @@ class Character(private val level: Int) {
         if (character.level - this.level >= 5) {
             return damage / 2
         }
+        if (this.level - character.level >= 5) {
+            return damage + damage / 2
+        }
         return damage
     }
 }

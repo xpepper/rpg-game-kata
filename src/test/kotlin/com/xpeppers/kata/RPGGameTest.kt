@@ -81,7 +81,7 @@ class RPGGameTest {
     }
 
     @Test
-    fun `when dealing damage, if the target is 5 or more Levels above the attacker, damage is reduced by 50%`() {
+    fun `when dealing damage, if the target is 5 or more levels above the attacker, damage is reduced by 50%`() {
         val attacker = Character(level = 1)
         val defender = Character(level = 6)
         val initialHealth = defender.health
@@ -89,5 +89,17 @@ class RPGGameTest {
         attacker.attack(defender, 10)
 
         assertEquals(initialHealth - 10/2, defender.health)
+    }
+
+    @Test
+    fun `when dealing damage, if the target is 5 or more levels below the attacker, damage is increased by 50%`() {
+        val attacker = Character(level = 6)
+        val defender = Character(level = 1)
+        val initialHealth = defender.health
+
+        attacker.attack(defender, 10)
+
+        assertEquals(initialHealth - (10 + 10/2), defender.health)
+
     }
 }
