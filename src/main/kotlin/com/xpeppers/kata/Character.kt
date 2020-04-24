@@ -11,10 +11,6 @@ class Character {
         character.receiveDamage(damage)
     }
 
-    fun receiveDamage(damage: Int) {
-        health = max(health - damage, 0)
-    }
-
     fun isAlive(): Boolean {
         return health > 0
     }
@@ -23,6 +19,10 @@ class Character {
         if (isAlive()) {
             healYourself(health)
         }
+    }
+
+    private fun receiveDamage(damage: Int) {
+        health = max(health - damage, 0)
     }
 
     private fun healYourself(health: Int) {
