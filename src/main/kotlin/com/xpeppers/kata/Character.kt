@@ -8,7 +8,8 @@ class Character {
         private set
 
     fun attack(character: Character, damage: Int) {
-        character.receiveDamage(damage)
+        if (this !== character)
+            character.receiveDamage(damage)
     }
 
     fun isAlive(): Boolean {

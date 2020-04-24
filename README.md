@@ -1,7 +1,5 @@
 # TODO
 
-* devo anche verificare che il target di un attacco non coincida con l'attacker!
-
 ---
 
 RPG Combat Kata

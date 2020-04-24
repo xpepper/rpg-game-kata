@@ -18,6 +18,16 @@ class RPGGameTest {
     }
 
     @Test
+    fun `a character cannot deal damage to itself`() {
+        val attacker = Character()
+        val initialHealth = attacker.health
+
+        attacker.attack(attacker, 1)
+
+        assertEquals(initialHealth, attacker.health)
+    }
+
+    @Test
     fun `when damage received exceeds current health, health becomes 0`() {
         val character = Character()
 
@@ -60,7 +70,7 @@ class RPGGameTest {
     }
 
     @Test
-     fun `dead characters cannot be healed`() {
+    fun `dead characters cannot be healed`() {
         val character = Character()
         Character().attack(character, 1001)
 
