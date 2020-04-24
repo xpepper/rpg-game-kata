@@ -3,13 +3,18 @@ package com.xpeppers.kata
 import kotlin.math.max
 import kotlin.math.min
 
-class Character {
+class Character(private val level: Int) {
     var health: Int = 1000
         private set
 
     fun attack(character: Character, damage: Int) {
-        if (this !== character)
-            character.receiveDamage(damage)
+        if (this !== character) {
+            if (character.level - this.level >= 5) {
+                character.receiveDamage(damage / 2)
+            } else {
+                character.receiveDamage(damage)
+            }
+        }
     }
 
     fun isAlive(): Boolean {

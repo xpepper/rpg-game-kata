@@ -7,8 +7,8 @@ class RPGGameTest {
 
     @Test
     fun `a character can deal damage only to another character`() {
-        val attacker = Character()
-        val character = Character()
+        val attacker = Character(1)
+        val character = Character(1)
         val initialHealth = character.health
         val damage = 1
 
@@ -19,7 +19,7 @@ class RPGGameTest {
 
     @Test
     fun `a character cannot deal damage to itself`() {
-        val attacker = Character()
+        val attacker = Character(1)
         val initialHealth = attacker.health
 
         attacker.attack(attacker, 1)
@@ -29,28 +29,28 @@ class RPGGameTest {
 
     @Test
     fun `when damage received exceeds current health, health becomes 0`() {
-        val character = Character()
+        val character = Character(1)
 
-        Character().attack(character, 2000)
+        Character(1).attack(character, 2000)
 
         assertEquals(0, character.health)
     }
 
     @Test
     fun `when damage received exceeds current health, the character dies`() {
-        val character = Character()
+        val character = Character(1)
 
         assertTrue(character.isAlive())
 
-        Character().attack(character, 2000)
+        Character(1).attack(character, 2000)
 
         assertFalse(character.isAlive())
     }
 
     @Test
     fun `a character can receive heal`() {
-        val character = Character()
-        Character().attack(character, 10)
+        val character = Character(1)
+        Character(1).attack(character, 10)
         val currentHealth = character.health
 
         character.heal(1)
@@ -60,9 +60,9 @@ class RPGGameTest {
 
     @Test
     fun `healing cannot raise health above 1000`() {
-        val character = Character()
+        val character = Character(1)
         val maxHealth = 1000
-        Character().attack(character, 5)
+        Character(1).attack(character, 5)
 
         character.heal(10)
 
@@ -71,12 +71,23 @@ class RPGGameTest {
 
     @Test
     fun `dead characters cannot be healed`() {
-        val character = Character()
-        Character().attack(character, 1001)
+        val character = Character(1)
+        Character(1).attack(character, 1001)
 
         character.heal(20)
 
         assertEquals(0, character.health)
         assertFalse(character.isAlive())
+    }
+
+    @Test
+    fun `when dealing damage, if the target is 5 or more Levels above the attacker, damage is reduced by 50%`() {
+        val attacker = Character(level = 1)
+        val defender = Character(level = 6)
+        val initialHealth = defender.health
+
+        attacker.attack(defender, 10)
+
+        assertEquals(initialHealth - 10/2, defender.health)
     }
 }
