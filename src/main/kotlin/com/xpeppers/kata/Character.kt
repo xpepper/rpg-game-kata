@@ -33,12 +33,14 @@ class Character(private val level: Int) {
     }
 
     private fun computeDamageFor(character: Character, damage: Int): Int {
-        if (character.level - this.level >= 5) {
-            return damage / 2
+        return when {
+            isWeakerThan(character) -> damage / 2
+            isStrongerThan(character) -> damage + damage / 2
+            else -> damage
         }
-        if (this.level - character.level >= 5) {
-            return damage + damage / 2
-        }
-        return damage
     }
+
+    private fun isStrongerThan(character: Character) = this.level - character.level >= 5
+
+    private fun isWeakerThan(character: Character) = character.level - this.level >= 5
 }
