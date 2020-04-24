@@ -1,6 +1,8 @@
 # TODO
 
 * separare la health interna mutabile da quella esterna che deve essere accesibile solo in lettura
+* buttare via .gitkeep
+* buttare via java folder?
 
 ---
 
