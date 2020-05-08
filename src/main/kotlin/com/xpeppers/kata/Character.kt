@@ -5,7 +5,11 @@ import kotlin.math.min
 
 class Character(private val level: Int = 1, private val maxRangeAttack: Int = Int.MAX_VALUE) {
     companion object {
-        fun meleeFighter(level: Int = 1) = Character(level, maxRangeAttack = 2)
+        const val MELEE_RANGE = 2
+        const val RANGED_RANGE = 20
+
+        fun meleeFighter(level: Int = 1) = Character(level, maxRangeAttack = MELEE_RANGE)
+        fun rangedFighter(level: Int = 1) = Character(level, maxRangeAttack = RANGED_RANGE)
     }
 
     var health: Int = 1000

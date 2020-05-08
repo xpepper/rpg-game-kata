@@ -1,6 +1,9 @@
 package com.xpeppers.kata
 
+import com.xpeppers.kata.Character.Companion.MELEE_RANGE
+import com.xpeppers.kata.Character.Companion.RANGED_RANGE
 import com.xpeppers.kata.Character.Companion.meleeFighter
+import com.xpeppers.kata.Character.Companion.rangedFighter
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
@@ -109,7 +112,7 @@ class RPGGameTest {
         val defender = Character(1)
         val initialHealth = defender.health
 
-        meleeAttacker.attack(defender, 5, distance = 3)
+        meleeAttacker.attack(defender, 5, distance = MELEE_RANGE + 1)
 
         assertEquals(initialHealth, defender.health)
     }
@@ -120,8 +123,19 @@ class RPGGameTest {
         val defender = Character(1)
         val initialHealth = defender.health
 
-        meleeAttacker.attack(defender, 5, distance = 1)
+        meleeAttacker.attack(defender, 5, distance = MELEE_RANGE - 1)
 
         assertEquals(initialHealth - 5, defender.health)
+    }
+
+    @Test
+    fun `ranged fighters cannot deal damage when the defender is out of its range`() {
+        val rangedAttacker = rangedFighter(1)
+        val defender = Character(1)
+        val initialHealth = defender.health
+
+        rangedAttacker.attack(defender, 5, distance = RANGED_RANGE + 1)
+
+        assertEquals(initialHealth, defender.health)
     }
 }
