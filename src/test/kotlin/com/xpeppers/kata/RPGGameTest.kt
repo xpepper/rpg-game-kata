@@ -1,8 +1,7 @@
 package com.xpeppers.kata
 
-import jdk.nashorn.internal.ir.annotations.Ignore
+import com.xpeppers.kata.Character.Companion.meleeFighter
 import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 
 class RPGGameTest {
@@ -102,17 +101,27 @@ class RPGGameTest {
         attacker.attack(defender, 10)
 
         assertEquals(initialHealth - (10 + 10/2), defender.health)
-
     }
 
     @Test
     fun `melee fighters cannot deal damage when the defender is out of its range`() {
-        val meleeAttacker = Character(1, maxRangeAttack = 2)
-        val meleeDefender = Character(1)
-        val initialHealth = meleeDefender.health
+        val meleeAttacker = meleeFighter(1)
+        val defender = Character(1)
+        val initialHealth = defender.health
 
-        meleeAttacker.attack(meleeDefender, 5, distance = 3)
+        meleeAttacker.attack(defender, 5, distance = 3)
 
-        assertEquals(initialHealth, meleeDefender.health)
+        assertEquals(initialHealth, defender.health)
+    }
+
+    @Test
+    fun `melee fighters can deal damage when the defender is within its range`() {
+        val meleeAttacker = meleeFighter(1)
+        val defender = Character(1)
+        val initialHealth = defender.health
+
+        meleeAttacker.attack(defender, 5, distance = 1)
+
+        assertEquals(initialHealth - 5, defender.health)
     }
 }

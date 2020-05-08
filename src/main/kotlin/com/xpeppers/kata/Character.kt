@@ -4,6 +4,10 @@ import kotlin.math.max
 import kotlin.math.min
 
 class Character(private val level: Int = 1, private val maxRangeAttack: Int = Int.MAX_VALUE) {
+    companion object {
+        fun meleeFighter(level: Int = 1) = Character(level, maxRangeAttack = 2)
+    }
+
     var health: Int = 1000
         private set
 
