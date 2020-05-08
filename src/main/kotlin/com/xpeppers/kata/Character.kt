@@ -3,14 +3,16 @@ package com.xpeppers.kata
 import kotlin.math.max
 import kotlin.math.min
 
-class Character(private val level: Int = 1) {
+class Character(private val level: Int = 1, private val maxRangeAttack: Int = Int.MAX_VALUE) {
     var health: Int = 1000
         private set
 
-    fun attack(character: Character, damage: Int) {
+    fun attack(character: Character, damage: Int, distance: Int = 0) {
         if (this !== character) {
-            val damageToDeal = computeDamageFor(character, damage)
-            character.receiveDamage(damageToDeal)
+            if (distance <= maxRangeAttack) {
+                val damageToDeal = computeDamageFor(character, damage)
+                character.receiveDamage(damageToDeal)
+            }
         }
     }
 
