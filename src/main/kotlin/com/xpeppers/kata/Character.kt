@@ -9,7 +9,7 @@ class Character(private val level: Int = 1, private val maxRangeAttack: Int = In
 
     fun attack(character: Character, damage: Int, distance: Int = 0) {
         if (this !== character) {
-            if (distance <= maxRangeAttack) {
+            if (isReachable(distance)) {
                 val damageToDeal = computeDamageFor(character, damage)
                 character.receiveDamage(damageToDeal)
             }
@@ -45,4 +45,6 @@ class Character(private val level: Int = 1, private val maxRangeAttack: Int = In
     private fun isStrongerThan(character: Character) = this.level - character.level >= 5
 
     private fun isWeakerThan(character: Character) = character.level - this.level >= 5
+
+    private fun isReachable(distance: Int) = distance <= maxRangeAttack
 }
