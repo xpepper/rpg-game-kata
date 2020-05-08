@@ -92,7 +92,7 @@ class RPGGameTest {
 
         attacker.attack(defender, 10)
 
-        assertEquals(initialHealth - 10/2, defender.health)
+        assertEquals(initialHealth - 10 / 2, defender.health)
     }
 
     @Test
@@ -103,7 +103,7 @@ class RPGGameTest {
 
         attacker.attack(defender, 10)
 
-        assertEquals(initialHealth - (10 + 10/2), defender.health)
+        assertEquals(initialHealth - (10 + 10 / 2), defender.health)
     }
 
     @Test
@@ -137,5 +137,16 @@ class RPGGameTest {
         rangedAttacker.attack(defender, 5, distance = RANGED_RANGE + 1)
 
         assertEquals(initialHealth, defender.health)
+    }
+
+    @Test
+    fun `ranged fighters can deal damage when the defender is within its range`() {
+        val rangedAttacker = rangedFighter(1)
+        val defender = Character(1)
+        val initialHealth = defender.health
+
+        rangedAttacker.attack(defender, 5, distance = RANGED_RANGE - 1)
+
+        assertEquals(initialHealth - 5, defender.health)
     }
 }
