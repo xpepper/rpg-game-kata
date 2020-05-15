@@ -5,6 +5,7 @@ import kotlin.math.min
 
 class Character(private val level: Int = 1, private val maxRangeAttack: Int = Int.MAX_VALUE) {
     companion object {
+        const val MAX_HEALTH = 1000
         const val MELEE_RANGE = 2
         const val RANGED_RANGE = 20
 
@@ -12,7 +13,7 @@ class Character(private val level: Int = 1, private val maxRangeAttack: Int = In
         fun rangedFighter(level: Int = 1) = Character(level, maxRangeAttack = RANGED_RANGE)
     }
 
-    var health: Int = 1000
+    var health: Int = MAX_HEALTH
         private set
 
     private val factions = mutableListOf<Faction>()
@@ -57,7 +58,7 @@ class Character(private val level: Int = 1, private val maxRangeAttack: Int = In
     }
 
     private fun healYourself(health: Int) {
-        this.health = min(this.health + health, 1000)
+        this.health = min(this.health + health, MAX_HEALTH)
     }
 
     private fun computeDamageFor(character: Character, damage: Int): Int {

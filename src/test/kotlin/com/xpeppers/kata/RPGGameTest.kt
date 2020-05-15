@@ -1,5 +1,6 @@
 package com.xpeppers.kata
 
+import com.xpeppers.kata.Character.Companion.MAX_HEALTH
 import com.xpeppers.kata.Character.Companion.MELEE_RANGE
 import com.xpeppers.kata.Character.Companion.RANGED_RANGE
 import com.xpeppers.kata.Character.Companion.meleeFighter
@@ -63,14 +64,13 @@ class RPGGameTest {
     }
 
     @Test
-    fun `healing cannot raise health above 1000`() {
+    fun `healing cannot raise health above its maximum value`() {
         val character = Character()
-        val maxHealth = 1000
         Character(1).attack(character, 5)
 
         character.heal(10)
 
-        assertEquals(maxHealth, character.health)
+        assertEquals(MAX_HEALTH, character.health)
     }
 
     @Test
@@ -110,11 +110,10 @@ class RPGGameTest {
     fun `melee fighters cannot deal damage when the defender is out of its range`() {
         val meleeAttacker = meleeFighter(1)
         val defender = Character(1)
-        val initialHealth = defender.health
 
         meleeAttacker.attack(defender, 5, distance = MELEE_RANGE + 1)
 
-        assertEquals(initialHealth, defender.health)
+        assertNotDamaged(defender)
     }
 
     @Test
@@ -132,11 +131,10 @@ class RPGGameTest {
     fun `ranged fighters cannot deal damage when the defender is out of its range`() {
         val rangedAttacker = rangedFighter(1)
         val defender = Character(1)
-        val initialHealth = defender.health
 
         rangedAttacker.attack(defender, 5, distance = RANGED_RANGE + 1)
 
-        assertEquals(initialHealth, defender.health)
+        assertNotDamaged(defender)
     }
 
     @Test
@@ -160,6 +158,10 @@ class RPGGameTest {
 
         firstCharacter.attack(secondCharacter, 100)
 
-        assertEquals(1000, secondCharacter.health)
+        assertNotDamaged(secondCharacter)
+    }
+
+    private fun assertNotDamaged(secondCharacter: Character) {
+        assertEquals(MAX_HEALTH, secondCharacter.health)
     }
 }
