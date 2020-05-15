@@ -15,14 +15,18 @@ class Character(private val level: Int = 1, private val maxRangeAttack: Int = In
     var health: Int = 1000
         private set
 
+    private val factions = mutableListOf<Faction>()
+
     fun attack(character: Character, damage: Int, distance: Int = 0) {
-        if (this !== character) {
-            if (isReachable(distance)) {
-                val damageToDeal = computeDamageFor(character, damage)
-                character.receiveDamage(damageToDeal)
-            }
+        if (itsMe(character) || belongsToTheSameFactionOf(character))
+            return
+
+        if (isReachable(distance)) {
+            val damageToDeal = computeDamageFor(character, damage)
+            character.receiveDamage(damageToDeal)
         }
     }
+
 
     fun isAlive(): Boolean {
         return health > 0
@@ -32,6 +36,20 @@ class Character(private val level: Int = 1, private val maxRangeAttack: Int = In
         if (isAlive()) {
             healYourself(health)
         }
+    }
+
+    fun join(faction: Faction) {
+        factions.add(faction)
+    }
+
+    private fun itsMe(character: Character) = this === character
+
+    private fun belongsToTheSameFactionOf(character: Character): Boolean {
+        for (faction in factions) {
+            if (character.factions.contains(faction))
+                return true
+        }
+        return false
     }
 
     private fun receiveDamage(damage: Int) {

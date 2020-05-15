@@ -149,4 +149,17 @@ class RPGGameTest {
 
         assertEquals(initialHealth - 5, defender.health)
     }
+
+    @Test
+    fun `characters belonging to the same faction cannot deal damage to each other`() {
+        val firstCharacter = Character()
+        val secondCharacter = Character()
+
+        firstCharacter.join(Faction.Dothraki)
+        secondCharacter.join(Faction.Dothraki)
+
+        firstCharacter.attack(secondCharacter, 100)
+
+        assertEquals(1000, secondCharacter.health)
+    }
 }
