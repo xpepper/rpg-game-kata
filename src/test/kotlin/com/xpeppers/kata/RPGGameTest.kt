@@ -76,7 +76,7 @@ class RPGGameTest {
     @Test
     fun `dead characters cannot be healed`() {
         val character = Character()
-        Character(1).attack(character, 1001)
+        kill(character)
 
         character.heal(20)
 
@@ -163,5 +163,9 @@ class RPGGameTest {
 
     private fun assertNotDamaged(secondCharacter: Character) {
         assertEquals(MAX_HEALTH, secondCharacter.health)
+    }
+
+    private fun kill(character: Character) {
+        Character(1).attack(character, MAX_HEALTH)
     }
 }
