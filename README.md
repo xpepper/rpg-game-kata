@@ -1,9 +1,5 @@
 # TODO
 
-* cannot deal damage when in the same faction [DOING]
-* what if I don't share factions with my attacker?
-* what if I leave the faction of my attacker? => implement the `leave` function
-
 * can heal when in the same faction
 
 ## Doubts

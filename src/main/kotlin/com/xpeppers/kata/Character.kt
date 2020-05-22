@@ -42,6 +42,9 @@ class Character(private val level: Int = 1, private val maxRangeAttack: Int = In
     fun join(faction: Faction) {
         factions.add(faction)
     }
+    fun leave(faction: Faction) {
+        factions.remove(faction)
+    }
 
     private fun itsMe(character: Character) = this === character
 

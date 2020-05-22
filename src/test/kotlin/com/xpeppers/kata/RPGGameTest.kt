@@ -157,12 +157,31 @@ class RPGGameTest {
         secondCharacter.join(Faction.Dothraki)
 
         firstCharacter.attack(secondCharacter, 100)
-
         assertNotDamaged(secondCharacter)
+
+        secondCharacter.attack(firstCharacter, 100)
+        assertNotDamaged(firstCharacter)
     }
 
-    private fun assertNotDamaged(secondCharacter: Character) {
-        assertEquals(MAX_HEALTH, secondCharacter.health)
+    @Test
+    fun `characters no more belonging to the same faction can deal damage to each other`() {
+        val firstCharacter = Character()
+        val secondCharacter = Character()
+
+        firstCharacter.join(Faction.Dothraki)
+        secondCharacter.join(Faction.Dothraki)
+
+        secondCharacter.leave(Faction.Dothraki)
+
+        firstCharacter.attack(secondCharacter, 100)
+        assertEquals(MAX_HEALTH - 100, secondCharacter.health)
+
+        secondCharacter.attack(firstCharacter, 100)
+        assertEquals(MAX_HEALTH - 100, firstCharacter.health)
+    }
+
+    private fun assertNotDamaged(character: Character) {
+        assertEquals(MAX_HEALTH, character.health)
     }
 
     private fun kill(character: Character) {
