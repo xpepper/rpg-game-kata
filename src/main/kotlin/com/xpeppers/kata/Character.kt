@@ -16,7 +16,7 @@ class Character(private val level: Int = 1, private val maxRangeAttack: Int = In
     var health: Int = MAX_HEALTH
         private set
 
-    private val factions = mutableListOf<Faction>()
+    private val factions = mutableSetOf<Faction>()
 
     fun attack(character: Character, damage: Int, distance: Int = 0) {
         if (itsMe(character) || belongsToTheSameFactionOf(character))

@@ -5,6 +5,7 @@ import com.xpeppers.kata.Character.Companion.MELEE_RANGE
 import com.xpeppers.kata.Character.Companion.RANGED_RANGE
 import com.xpeppers.kata.Character.Companion.meleeFighter
 import com.xpeppers.kata.Character.Companion.rangedFighter
+import com.xpeppers.kata.Faction.*
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
@@ -153,8 +154,8 @@ class RPGGameTest {
         val firstCharacter = Character()
         val secondCharacter = Character()
 
-        firstCharacter.join(Faction.Dothraki)
-        secondCharacter.join(Faction.Dothraki)
+        firstCharacter.join(Dothraki)
+        secondCharacter.join(Dothraki)
 
         firstCharacter.attack(secondCharacter, 100)
         assertNotDamaged(secondCharacter)
@@ -168,10 +169,10 @@ class RPGGameTest {
         val firstCharacter = Character()
         val secondCharacter = Character()
 
-        firstCharacter.join(Faction.Dothraki)
-        secondCharacter.join(Faction.Dothraki)
+        firstCharacter.join(Dothraki)
+        secondCharacter.join(Dothraki)
 
-        secondCharacter.leave(Faction.Dothraki)
+        secondCharacter.leave(Dothraki)
 
         firstCharacter.attack(secondCharacter, 100)
         assertEquals(MAX_HEALTH - 100, secondCharacter.health)
@@ -185,8 +186,8 @@ class RPGGameTest {
         val firstCharacter = Character()
         val secondCharacter = Character()
 
-        firstCharacter.join(Faction.Dothraki)
-        secondCharacter.join(Faction.Dothraki)
+        firstCharacter.join(Dothraki)
+        secondCharacter.join(Dothraki)
 
         dealDamage(firstCharacter, 150)
         dealDamage(secondCharacter, 200)
@@ -203,8 +204,8 @@ class RPGGameTest {
         val firstCharacter = Character()
         val secondCharacter = Character()
 
-        firstCharacter.join(Faction.Stark)
-        secondCharacter.join(Faction.Dothraki)
+        firstCharacter.join(Stark)
+        secondCharacter.join(Dothraki)
 
         dealDamage(firstCharacter, 150)
 
