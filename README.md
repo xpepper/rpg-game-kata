@@ -1,9 +1,23 @@
 ## TODO
+* Characters can damage non-character *things*.
 
-## Doubts
+```kotlin
+    @Test
+    fun `character can deal damage to a thing`() {
+        val thing = Thing(2000)
+        val character = Character()
+        character.attack(thing, 10)
+        assertEquals(2000 - 10, thing.health)
+    }
+```
 
-* can I join to the same faction twice?
-* join does not still support the ability to join more than one faction at a time => do we really need this? 
+  - Anything that has Health may be a target
+  - These things cannot be Healed and they do not Deal Damage
+  - These things do not belong to Factions; they are neutral
+  - When reduced to 0 Health, things are *Destroyed*
+  - As an example, you may create a Tree with 2000 Health
+
+## Doubts 
 
 ---
 

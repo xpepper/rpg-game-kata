@@ -28,7 +28,6 @@ class Character(private val level: Int = 1, private val maxRangeAttack: Int = In
         }
     }
 
-
     fun isAlive(): Boolean {
         return health > 0
     }
