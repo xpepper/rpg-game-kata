@@ -1,3 +1,5 @@
+## TODO
+
 ## Doubts
 
 * can I join to the same faction twice?

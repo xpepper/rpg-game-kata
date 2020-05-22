@@ -53,7 +53,7 @@ class RPGGameTest {
     }
 
     @Test
-    fun `a character can receive heal`() {
+    fun `a character can heal itself`() {
         val character = Character()
         Character().attack(character, 10)
         val currentHealth = character.health
@@ -74,7 +74,7 @@ class RPGGameTest {
     }
 
     @Test
-    fun `dead characters cannot be healed`() {
+    fun `dead characters cannot heal themselves`() {
         val character = Character()
         kill(character)
 
@@ -181,21 +181,35 @@ class RPGGameTest {
     }
 
     @Test
-     fun `character belonging to the same faction can heal each other`() {
+    fun `character belonging to the same faction can heal each other`() {
         val firstCharacter = Character()
         val secondCharacter = Character()
 
         firstCharacter.join(Faction.Dothraki)
         secondCharacter.join(Faction.Dothraki)
 
-        dealDamage(firstCharacter, 100)
+        dealDamage(firstCharacter, 150)
         dealDamage(secondCharacter, 200)
 
-        firstCharacter.heal(secondCharacter, 100)
-        assertEquals(1000 - 200 + 100, secondCharacter.health)
+        firstCharacter.heal(secondCharacter, SOME_HEALING)
+        assertEquals(MAX_HEALTH - 200 + SOME_HEALING, secondCharacter.health)
 
-        secondCharacter.heal(firstCharacter, 100)
-        assertEquals(1000 - 100 + 100, firstCharacter.health)
+        secondCharacter.heal(firstCharacter, SOME_HEALING)
+        assertEquals(MAX_HEALTH - 150 + SOME_HEALING, firstCharacter.health)
+    }
+
+    @Test
+    fun `character not belonging to the same faction cannot heal each other`() {
+        val firstCharacter = Character()
+        val secondCharacter = Character()
+
+        firstCharacter.join(Faction.Stark)
+        secondCharacter.join(Faction.Dothraki)
+
+        dealDamage(firstCharacter, 150)
+
+        secondCharacter.heal(firstCharacter, SOME_HEALING)
+        assertEquals(MAX_HEALTH - 150, firstCharacter.health)
     }
 
     private fun assertNotDamaged(character: Character) {
@@ -203,10 +217,14 @@ class RPGGameTest {
     }
 
     private fun kill(character: Character) {
-        Character(1).attack(character, MAX_HEALTH)
+        dealDamage(character, MAX_HEALTH)
     }
 
     private fun dealDamage(character: Character, damage: Int) {
         Character().attack(character, damage)
+    }
+
+    companion object {
+        const val SOME_HEALING = 100
     }
 }
