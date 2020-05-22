@@ -39,6 +39,12 @@ class Character(private val level: Int = 1, private val maxRangeAttack: Int = In
         }
     }
 
+    fun heal(character: Character, health: Int) {
+        if (belongsToTheSameFactionOf(character)) {
+            character.heal(health)
+        }
+    }
+
     fun join(faction: Faction) {
         factions.add(faction)
     }

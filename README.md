@@ -1,7 +1,3 @@
-# TODO
-
-* can heal when in the same faction
-
 ## Doubts
 
 * can I join to the same faction twice?

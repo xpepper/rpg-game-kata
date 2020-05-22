@@ -180,11 +180,33 @@ class RPGGameTest {
         assertEquals(MAX_HEALTH - 100, firstCharacter.health)
     }
 
+    @Test
+     fun `character belonging to the same faction can heal each other`() {
+        val firstCharacter = Character()
+        val secondCharacter = Character()
+
+        firstCharacter.join(Faction.Dothraki)
+        secondCharacter.join(Faction.Dothraki)
+
+        dealDamage(firstCharacter, 100)
+        dealDamage(secondCharacter, 200)
+
+        firstCharacter.heal(secondCharacter, 100)
+        assertEquals(1000 - 200 + 100, secondCharacter.health)
+
+        secondCharacter.heal(firstCharacter, 100)
+        assertEquals(1000 - 100 + 100, firstCharacter.health)
+    }
+
     private fun assertNotDamaged(character: Character) {
         assertEquals(MAX_HEALTH, character.health)
     }
 
     private fun kill(character: Character) {
         Character(1).attack(character, MAX_HEALTH)
+    }
+
+    private fun dealDamage(character: Character, damage: Int) {
+        Character().attack(character, damage)
     }
 }
