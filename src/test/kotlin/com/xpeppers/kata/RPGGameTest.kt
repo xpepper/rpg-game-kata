@@ -213,6 +213,14 @@ class RPGGameTest {
         assertEquals(MAX_HEALTH - 150, firstCharacter.health)
     }
 
+    @Test
+    fun `character can deal damage to a thing`() {
+        val thing = Thing(2000)
+        val character = Character()
+        character.attack(thing, 10)
+        assertEquals(2000 - 10, thing.health)
+    }
+
     private fun assertNotDamaged(character: Character) {
         assertEquals(MAX_HEALTH, character.health)
     }

@@ -28,6 +28,10 @@ class Character(private val level: Int = 1, private val maxRangeAttack: Int = In
         }
     }
 
+    fun attack(thing: Thing, damage: Int) {
+        thing.receiveDamage(damage)
+    }
+
     fun isAlive(): Boolean {
         return health > 0
     }

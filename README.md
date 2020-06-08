@@ -1,17 +1,5 @@
 ## TODO
-* Characters can damage non-character *things*.
 
-```kotlin
-    @Test
-    fun `character can deal damage to a thing`() {
-        val thing = Thing(2000)
-        val character = Character()
-        character.attack(thing, 10)
-        assertEquals(2000 - 10, thing.health)
-    }
-```
-
-  - Anything that has Health may be a target
   - These things cannot be Healed and they do not Deal Damage
   - These things do not belong to Factions; they are neutral
   - When reduced to 0 Health, things are *Destroyed*
