@@ -9,7 +9,7 @@ import com.xpeppers.kata.Faction.*
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-class RPGGameTest {
+class CharacterTest {
 
     @Test
     fun `a character can deal damage only to another character`() {
@@ -219,18 +219,6 @@ class RPGGameTest {
         val character = Character()
         character.attack(tree, 10)
         assertEquals(2000 - 10, tree.health)
-    }
-
-    @Test
-    fun `when reduced to 0 Health, things are Destroyed`() {
-        val thing = Thing(10)
-        assertFalse(thing.isDestroyed())
-
-        val character = Character()
-        character.attack(thing, 20)
-
-        assertTrue(thing.isDestroyed())
-        assertEquals(0, thing.health)
     }
 
     private fun assertNotDamaged(character: Character) {
