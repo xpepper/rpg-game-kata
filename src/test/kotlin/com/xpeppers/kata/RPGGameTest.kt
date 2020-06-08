@@ -215,10 +215,22 @@ class RPGGameTest {
 
     @Test
     fun `character can deal damage to a thing`() {
-        val thing = Thing(2000)
+        val tree = Thing(2000)
         val character = Character()
-        character.attack(thing, 10)
-        assertEquals(2000 - 10, thing.health)
+        character.attack(tree, 10)
+        assertEquals(2000 - 10, tree.health)
+    }
+
+    @Test
+    fun `when reduced to 0 Health, things are Destroyed`() {
+        val thing = Thing(10)
+        assertFalse(thing.isDestroyed())
+
+        val character = Character()
+        character.attack(thing, 20)
+
+        assertTrue(thing.isDestroyed())
+        assertEquals(0, thing.health)
     }
 
     private fun assertNotDamaged(character: Character) {
