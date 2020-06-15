@@ -32,9 +32,7 @@ class Character(private val level: Int = 1, private val maxRangeAttack: Int = In
         thing.receiveDamage(damage)
     }
 
-    fun isAlive(): Boolean {
-        return health > 0
-    }
+    fun isAlive(): Boolean = health > 0
 
     fun heal(character: Character, health: Int) {
         if (belongsToTheSameFactionOf(character)) {
@@ -58,13 +56,7 @@ class Character(private val level: Int = 1, private val maxRangeAttack: Int = In
 
     private fun itsMe(character: Character) = this === character
 
-    private fun belongsToTheSameFactionOf(character: Character): Boolean {
-        for (faction in factions) {
-            if (character.factions.contains(faction))
-                return true
-        }
-        return false
-    }
+    private fun belongsToTheSameFactionOf(character: Character) = factions.intersect(character.factions).isNotEmpty()
 
     private fun receiveDamage(damage: Int) {
         health = max(health - damage, 0)
